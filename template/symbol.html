@@ -1,0 +1,15 @@
+{{ define "symbol" }}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="-5 -5 10 10" width="30" height="30">
+    {{- if .FillColor }}
+    <rect x="-5" y="-5" height="10" width="10" style="fill: {{ .FillColor }}" />
+    {{ end -}}
+    {{- if .OutlineWidth }}
+    <line {{ if .LineDasharray }}stroke-dasharray="{{ .LineDasharray }}"{{ end }}x1="-5" y1="0" x2="5" y2="0"
+        style="stroke: {{ .OutlineColor }}; stroke-width: {{ .OutlineWidth }};" />
+    {{ end -}}
+    {{- if .LineWidth }}
+    <line {{ if .LineDasharray }}stroke-dasharray="{{ .LineDasharray }}"{{ end }}x1="-5" y1="0" x2="5" y2="0"
+        style="stroke: {{ .LineColor }}; stroke-width: {{ .LineWidth }};" />
+    {{ end -}}
+</svg>
+{{ end }}

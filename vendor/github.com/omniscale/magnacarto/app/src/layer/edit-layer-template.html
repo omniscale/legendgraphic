@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <span class="modal-title">
+    Edit layer
+  </span>
+  <div ng-show="isNewLayer" class="pull-right">
+    <div class="form-inline copy-layer-form">
+        <select class="selectpicker form-control" ng-model="layerCopy" ng-options="layer.name for layer in layers">
+          <option value="" disabled="disabled">Layer to copy</option>
+        </select>
+        <button class="btn btn-default" ng-disabled="!layerCopy" ng-click="copyLayer(layerCopy)"><i class="glyphicon glyphicon-copy"></i></button>
+      </div>
+    </div>
+    <button ng-click="cancel()" class="close" type="button" >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+</div>
+<div class="modal-body layer-form">
+  <form name="layerForm" class="">
+    <div class="panel panel-default">
+      <div class="panel-heading" ng-click="hideGeneral = !hideGeneral">
+        <span>General</span>
+        <i class="glyphicon" ng-class="{'glyphicon-chevron-right': hideGeneral, 'glyphicon-chevron-down': !hideGeneral}"></i>
+      </div>
+      <div class="panel-body form-horizontal" collapse="hideGeneral">
+        <div form-group>
+          <input name="name" type="text" ng-model="layer.name" required ng-blur="setId()"/>
+        </div>
+        <div form-group>
+          <input name="id" type="text" ng-model="layer.id" required />
+        </div>
+        <div form-group>
+          <input name="class" type="text" ng-model="layer.class" />
+        </div>
+
+        <div form-group>
+          <select name="geometry" type="text" ng-model="layer.geometry">
+            <option value="point">Point</option>
+            <option value="linestring">Linestring</option>
+            <option value="polygon">Polygon</option>
+            <option value="raster">Raster</option>
+          </select>
+        </div>
+        <div form-group>
+            <div input-dropdown="srsSuggestions" ng-model="layer.srs">
+              <input name="srs" type="text" ng-model="layer.srs" title="SRS" required />
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading cursor-pointer" ng-click="hideDatasource = !hideDatasource">
+        <span>Datasource</span>
+        <i class="glyphicon" ng-class="{'glyphicon-chevron-right': hideDatasource, 'glyphicon-chevron-down': !hideDatasource}"></i>
+      </div>
+      <div class="panel-body form-horizontal" collapse="hideDatasource">
+        <div form-group>
+          <select name="type" type="text" ng-model="layer.Datasource.type" required>
+            <option value="shape">Shape</option>
+            <option value="postgis">Postgis</option>
+            <option value="sqlite">SQlite</option>
+            <option value="gdal">Gdal</option>
+            <option value="ogr">OGR</option>
+            <option value="geojson">GeoJSON</option>
+          </select>
+        </div>
+        <div ng-include="datasourceTemplates[layer.Datasource.type]"></div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default pull-left" ng-click="openRemoveModal()">Remove Layer</button>
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <input type="submit" class="btn btn-success" ng-disabled="layerForm.$invalid" ng-click="ok()" value="Save" />
+</div>

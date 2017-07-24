@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style>
+    /* ul {
+        list-style-type: none;
+    } */
+
+    ul li {
+        display: block;
+        line-height: 50px;
+        height: 50px;
+    }
+    ul li svg {
+        vertical-align: middle;
+    }
+        </style>
+    </head>
+    <body>
+        <h1>{{ .Title }}</h1>
+        {{ range .Groups }}
+            <h2>{{ .Title }}</h2>
+            <ul>
+            {{ range .Layers }}
+                <li class="lg-item">
+                    {{- template "symbol" . -}}
+                    {{ .Title }}
+                </li>
+            {{ end }}
+            </ul>
+        {{ end }}
+    </body>
+</html>

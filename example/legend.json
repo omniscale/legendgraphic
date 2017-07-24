@@ -1,0 +1,47 @@
+{
+    "title": "Legend",
+    "groups": [
+        {
+            "title": "Roads and Ways",
+            "layers": [
+                {
+                    "title": "Motorway",
+                    "line-width": 2,
+                    "line-color": "@motorway_fill",
+                    "outline-width": 4,
+                    "outline-color": "@motorway_case"
+                },
+                {
+                    "title": "Primary roads",
+                    "line-width": 2,
+                    "line-color": "@primary_fill",
+                    "outline-width": 3,
+                    "outline-color": "@primary_case"
+                },
+                {
+                    "title": "Footways",
+                    "line-width": 0.5,
+                    "line-color": "@footway_fill",
+                    "line-dasharray": "@footway_dash"
+                }
+            ]
+        },
+        {
+            "title": "Land-use",
+            "layers": [
+                {
+                    "title": "Water",
+                    "fill-color": "@water"
+                },
+                {
+                    "title": "Park",
+                    "fill-color": "@grass"
+                },
+                {
+                    "title": "Forest",
+                    "fill-color": "@forest"
+                }
+            ]
+        }
+    ]
+}
