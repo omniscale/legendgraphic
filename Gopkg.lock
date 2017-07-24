@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  name = "github.com/husl-colors/husl-go"
+  name = "github.com/hsluv/hsluv-go"
   packages = ["."]
   revision = "a29f6990a3be79fefb4470f2a0b9a4d076949577"
   version = "v2.0.0"
@@ -11,7 +11,7 @@
   branch = "master"
   name = "github.com/omniscale/magnacarto"
   packages = ["color","mss"]
-  revision = "ae86abf88da61fe4b198cdc0c77f09b30c6be49c"
+  revision = "de3a6b7ba92e6df7af75c26e443319f6d7143b2d"
 
 [[projects]]
   name = "github.com/pkg/errors"
