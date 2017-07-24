@@ -3,12 +3,13 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"io"
 	"log"
 	"os"
-
-	"io"
+	"path/filepath"
 
 	"github.com/omniscale/legendgraphic"
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -42,6 +43,11 @@ func main() {
 		os.Exit(1)
 	}
 
+	tmplDir, err := findTemplateDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	var out io.Writer
 	if *outFile != "-" {
 		f, err := os.Create(*outFile)
@@ -53,7 +59,29 @@ func main() {
 	} else {
 		out = os.Stdout
 	}
-	if err := legendgraphic.RenderLegend(out, legend); err != nil {
+	if err := legendgraphic.RenderLegend(out, tmplDir, legend); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func findTemplateDir() (string, error) {
+	// relative to exec?
+	here, err := filepath.Abs(os.Args[0])
+	if err != nil {
+		return "", err
+	}
+	here, _ = filepath.Split(here)
+	tmplDir := filepath.Join(here, "template")
+
+	if fi, err := os.Stat(tmplDir); os.IsNotExist(err) || !fi.IsDir() {
+
+		// relative to current working dir?
+		tmplDir = "template"
+		if fi, err := os.Stat(tmplDir); os.IsNotExist(err) || !fi.IsDir() {
+			return "", errors.New("unable to find template dir")
+		}
+	}
+
+	return tmplDir, nil
+
 }

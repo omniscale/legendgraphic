@@ -3,6 +3,7 @@ package legendgraphic
 import (
 	"html/template"
 	"io"
+	"path/filepath"
 	"strings"
 
 	"bytes"
@@ -40,7 +41,7 @@ type PolygonStyle struct {
 	FillColor string `json:"fill-color"`
 }
 
-func RenderLegend(w io.Writer, l *Legend) error {
+func RenderLegend(w io.Writer, templateDir string, l *Legend) error {
 	tmpl := template.New("legend.html")
 	tmpl.Funcs(template.FuncMap{
 		"attr": func(s string) template.HTMLAttr {
@@ -50,7 +51,7 @@ func RenderLegend(w io.Writer, l *Legend) error {
 			return template.HTML(s)
 		},
 	})
-	tmpl = template.Must(tmpl.ParseGlob("template/*.html"))
+	tmpl = template.Must(tmpl.ParseGlob(filepath.Join(templateDir, "*.html")))
 	return tmpl.Execute(w, l)
 }
 
