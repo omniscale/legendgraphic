@@ -1,0 +1,15 @@
+project_name: legendgraphic
+builds:
+  - main: ./cmd/legendgraphic/legendgraphic.go
+    binary: legendgraphic
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+
+archive:
+  files:
+    - template/*
+    - example/*
