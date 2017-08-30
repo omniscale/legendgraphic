@@ -8,8 +8,14 @@ builds:
       - linux
     goarch:
       - amd64
+      - 386
+    ignore:
+      - goos: darwin
+        goarch: 386
 
 archive:
   files:
     - template/*
     - example/*
+    - LICENSE
+    - README.md
